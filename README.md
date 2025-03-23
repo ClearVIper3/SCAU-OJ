@@ -1,2 +1,3 @@
-# SCAU-OJ
-SCAU
+# SCAU
+---欢迎来访---
+
