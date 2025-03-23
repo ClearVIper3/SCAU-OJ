@@ -1,0 +1,46 @@
+#include <iostream>
+#include <vector>
+using namespace std;
+
+void Merge(vector<int>& arr,vector<int>& tmp,int st,int en,int mid)
+{
+    int left = st; int right = mid + 1; int idx = st;
+    while(left <= mid && right <= en)
+        if(arr[left] > arr[right])
+            tmp[idx++] = arr[right++];
+        else
+            tmp[idx++] = arr[left++];
+
+    while(left <= mid)
+        tmp[idx++] = arr[left++];
+
+    while(right <= en)
+        tmp[idx++] = arr[right++];
+
+    for(int i = st; i <= en; i++)
+        arr[i] = tmp[i];
+}
+
+
+void mergesort(vector<int>& arr,vector<int>& tmp,int st,int en)
+{
+    if(st >= en) return;
+    int mid = st + (en - st) / 2;
+    mergesort(arr,tmp,st,mid);
+    mergesort(arr,tmp,mid + 1,en);
+    Merge(arr,tmp,st,en,mid);
+    for(int i = 0; i < arr.size(); i++)
+        cout << arr[i] << ' ';
+    cout << endl;
+}
+
+
+int main()
+{
+    int n;
+    cin >> n;
+    vector<int> arr(n);
+    vector<int> tmp(n);
+    for(int i = 0; i < n; i++) cin >> arr[i];
+    mergesort(arr,tmp,0,n - 1);
+}
