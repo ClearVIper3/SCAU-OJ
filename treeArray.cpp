@@ -1,8 +1,3 @@
-#include<bits/stdc++.h>
-typedef long long LL;
-typedef unsigned long long ULL;
-using namespace std;
-
 class treeArr{
 #define Mytype int
 private:
@@ -21,8 +16,12 @@ public:
     }
     
     treeArr(vector<int>& nums){
-        arr = nums;
-        n = nums.size();
+        n = nums.size();//nums下标从0开始
+        tarr.resize(n + 1,0);
+        arr.resize(n + 1,0);
+        for (int i = 0; i < n; ++i) {
+            arr[i + 1] = nums[i]; 
+        }
         init();
     }
 
@@ -54,3 +53,11 @@ public:
         return ans;
     }
 };
+
+int main()
+{
+    int n,m;
+    cin >> n >> m;
+    vector<int> arr
+    for(int i = 0; i < n; i++)
+}
