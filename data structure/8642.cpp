@@ -9,22 +9,20 @@ void Sort(vector<int>& arr,int low,int high)
     int j = high;
 
     int key = arr[low];
-    int tmp;
+    int hole = i;
     while(i != j)
     {
         while(key <= arr[j] && i != j)
             j--;
-        tmp = arr[j];
-        arr[j] = arr[i];
-        arr[i] = tmp;
+        arr[hole] = arr[j];
+        hole = j;
         while(key >= arr[i] && i != j)
             i++;
-        tmp = arr[i];
-        arr[i] = arr[j];
-        arr[j] = tmp;
+        arr[hole] = arr[i];
+        hole = i;
     }
 
-    arr[i] = tmp;
+    arr[hole] = key;
 
     for(int i = 0; i < arr.size(); i++)
         cout << arr[i] << ' ';
