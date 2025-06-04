@@ -5,21 +5,21 @@ using namespace std;
 void Sort(vector<int>& arr,int low,int high)
 {
     if(low >= high) return;
-    int i = low;
-    int j = high;
+    int left = low;
+    int right = high;
 
     int key = arr[low];
-    int hole = i;
-    while(i != j)
+    int hole = left;
+    while(left != right)
     {
-        while(key <= arr[j] && i != j)
-            j--;
-        arr[hole] = arr[j];
-        hole = j;
-        while(key >= arr[i] && i != j)
-            i++;
-        arr[hole] = arr[i];
-        hole = i;
+        while(key <= arr[right] && left != right)
+            right--;
+        arr[hole] = arr[right];
+        hole = right;
+        while(key >= arr[left] && left != right)
+            left++;
+        arr[hole] = arr[left];
+        hole = left;
     }
 
     arr[hole] = key;
@@ -27,8 +27,8 @@ void Sort(vector<int>& arr,int low,int high)
     for(int i = 0; i < arr.size(); i++)
         cout << arr[i] << ' ';
     cout << endl;
-    Sort(arr,low,i - 1);
-    Sort(arr,i + 1,high);
+    Sort(arr,low,hole - 1);
+    Sort(arr,hole + 1,high);
 }
 
 int main(){
