@@ -5,32 +5,18 @@ using namespace std;
 void shellSort(vector<int>& arr)
 {
     int n = arr.size();
-    int gap = n;
-    while(gap > 1)
-    {
-        gap /= 2;
-        for(int i = 0; i < n - gap; i++)
-        {
-            int end = i;
-            int tmp = arr[end + gap];
-            while(end >= 0)
-            {
-                if(arr[end] > tmp)
-                {
-                    arr[end + gap] = arr[end];
-                    end -= gap;
-                }
-                else
-                {
-                    break;
-                }
+    for(int gap = n / 2; gap > 0; gap /= 2){
+        for(int i = gap; i < n; i++){
+            int key = arr[i];
+            int j = i - gap;
+            while(j >= 0 && arr[j] > key){
+                arr[j + gap] = arr[j];
+                j -= gap;
             }
-            arr[end + gap] = tmp;
+            arr[j + gap] = key;
         }
-        for(int i = 0; i < n; i++)
-        {
-            cout << arr[i] << " ";
-        }
+        for(int u = 0; u < n; u++)
+            cout << arr[u] << ' ';
         cout << endl;
     }
 }
