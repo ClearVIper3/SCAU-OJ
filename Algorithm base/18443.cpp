@@ -1,61 +1,53 @@
 #include <iostream>
-#include <string>
-#include <cstring>
+#include <vector>
 #include <algorithm>
+#include <string>
+#include <map>
 using namespace std;
 
-bool cmp(int x,int u)
+bool check(int x,int i)
 {
     int a[10] = {0};
-    while(x)
-    {
-        if(x % 10 != 0 && a[x % 10]) return false;
+    while(x){
+        if(x % 10 != 0 && a[x % 10])
+            return false;
         a[x % 10]++;
         x /= 10;
     }
-    while(u)
-    {
-        if(u % 10 != 0 && a[u % 10]) return false;
-        a[u % 10]++;
-        u /= 10;
+    while(i){
+        if(i % 10 != 0 && a[i % 10])
+            return false;
+        a[i % 10]++;
+        i /= 10;
     }
     return true;
 }
 
-string to(int i)
-{
+string to(int x){
     string res = "";
-    while(i)
-    {
-        res += i % 10 + '0';
-        i /= 10;
+    while(x){
+        res += x % 10 + '0';
+        x /= 10;
     }
+    while(res.size() < 5)
+        res += '0';
     reverse(res.begin(),res.end());
     return res;
 }
 
-void show(int i,int u,int n)
-{
-    string a = to(i);
-    string b = to(u);
-    reverse(a.begin(),a.end());
-    reverse(b.begin(),b.end());
-    for(int i = a.size(); i < 5; i++) a.push_back('0');
-    for(int i = b.size(); i < 5; i++) b.push_back('0');
-    reverse(a.begin(),a.end());
-    reverse(b.begin(),b.end());
-    cout << a << '/' << b << '=' << n << endl;
-}
-
 int main()
 {
+    ios::sync_with_stdio(0);
+    cin.tie(0);
+
     int n;
-    while(cin >> n && n != 0)
-    {
-        for(int u = 1; u * n <= 99999; u++)
-            if(cmp(u * n,u))
-                show(u * n,u,n);
-   
+    while(cin >> n && n != 0){
+        for(int i = 1; i * n <= 99999; i++){
+            if(check(i * n,i))
+                cout << to(i * n) << '/' << to(i) << '=' << n << endl;
+        }
         cout << endl;
     }
+
+    return 0;
 }
